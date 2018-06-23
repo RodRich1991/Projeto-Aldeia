@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Menu/>
     <div class="register-photo">
       <div class="clearfix"></div>
       <div class="clearfix"></div>
@@ -23,7 +22,6 @@
 
 <script>
 
-import Menu from '@/pages/main/menu'
 import Proxy from '@/proxies/Proxy'
 
 export default {
@@ -48,9 +46,6 @@ export default {
         response.then(retorno => console.warn(retorno))
       }
     }
-  },
-  components: {
-    Menu
   }
 }
 </script>
