@@ -1,21 +1,18 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+  <div>
+    <Menu/>
   </div>
 </template>
 
 <script>
 // import Vue from 'vue'
-import HelloWorld from './components/HelloWorld'
-// import {sql} from './db/connection.js'
-
-// Vue.use(sql)
+import Menu from '@/pages/main/menu'
+import Proxy from '@/proxies/Proxy'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Menu
   },
   data: function () {
     return {
@@ -24,52 +21,12 @@ export default {
     }
   },
   created () {
-    // this.object = this.createConnect()
-    // this.object.connect()
-    this.newtest()
-  },
-  methods: {
-    prepareConnection () {
-      return require('mysql')
-    },
-    createConnect () {
-      return this.prepareConnection().createConnection({
-        host: 'localhost',
-        port: 3306,
-        user: 'root',
-        password: 'vertrigo',
-        database: 'aldeia'
-      }).then(this.connect())
-    },
-    newtest () {
-      var mysql = require('mysql')
-      var con = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'vertrigo'
-      })
-      con.connect(function (err) {
-        if (err) throw err
-        console.log('Connected!')
-      })
-    }
-    // makeConnection () {
-    //   return this.createConnection().connect((err) => {
-    //     if (err) return console.log(err)
-    //     console.log('Conectado no BD!')
-    //   })
-    // }
+    const proxy = new Proxy('genero')
+    const response = proxy.findOneById(8)
+    response.then(retorno => console.warn(retorno))
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

@@ -6,13 +6,15 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
 import App from './App'
 import Login from './pages/main/Login'
+import NewUser from './pages/usuario/Novo'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/', component: App },
-  { path: '/login', component: Login }
+  { path: '/login', component: Login },
+  { path: '/cadastro-usuario', component: NewUser }
 ]
 
 const router = new VueRouter({
