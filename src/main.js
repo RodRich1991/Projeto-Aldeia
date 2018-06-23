@@ -7,21 +7,55 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import App from './App'
 import Login from './pages/main/Login'
 import NewUser from './pages/usuario/Novo'
+import JogosForm from './pages/games/Form'
+import Jogos from './pages/games/Jogos'
+import Gato from './pages/games/gato/Gato'
+import Velha from './pages/games/jogo-da-velha/Velha'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: App },
-  { path: '/login', component: Login },
-  { path: '/cadastro-usuario', component: NewUser }
+  {
+    name: 'index',
+    path: '/',
+    component: Jogos
+  },
+  {
+    name: 'login',
+    path: '/login',
+    component: Login
+  },
+  {
+    name: 'cadastr-usuario',
+    path: '/cadastro-usuario',
+    component: NewUser
+  },
+  {
+    name: 'jogo-form',
+    path: '/jogos/novo',
+    component: JogosForm
+  },
+  {
+    name: 'jogos',
+    path: '/jogos',
+    component: Jogos
+  },
+  {
+    name: 'Jogo do Gato',
+    path: '/jogo-do-gato',
+    component: Gato
+  },
+  {
+    name: 'Jogo da Velha',
+    path: '/jogo-da-velha',
+    component: Velha
+  }
 ]
 
 const router = new VueRouter({
-  routes // short for `routes: routes`
+  routes: routes, // short for `routes: routes`
+  mode: 'history'
 })
 
-/* eslint-disable no-new */
-new Vue({
-  router
-}).$mount('#app')
+new Vue(Vue.util.extend({ router }, App)).$mount('#app')
