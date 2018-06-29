@@ -36,7 +36,7 @@
               </li>
             </ul>
             <div v-if="logado && usuario.id" class="row">
-              <span>Bem vindo {{ usuario.nome }}</span>
+              <span>Bem vindo <strong>{{ usuario.nome }}</strong></span>
               <a href="#" @click="usuario = null; logado = false"><span>Sair</span></a>
             </div>
             <div v-else class="d-none d-lg-flex">

@@ -9,8 +9,7 @@ import Login from './pages/main/Login'
 import NewUser from './pages/usuario/Novo'
 import JogosForm from './pages/games/Form'
 import Jogos from './pages/games/Jogos'
-import Gato from './pages/games/gato/Gato'
-import Velha from './pages/games/jogo-da-velha/Velha'
+import Jogar from './pages/games/Jogar'
 import NewGenero from './pages/genero/Form'
 
 Vue.config.productionTip = false
@@ -43,19 +42,14 @@ const routes = [
     component: JogosForm
   },
   {
+    name: 'jogar',
+    path: '/jogar',
+    component: Jogar
+  },
+  {
     name: 'jogos',
     path: '/jogos',
     component: Jogos
-  },
-  {
-    name: 'Jogo do Gato',
-    path: '/jogo-do-gato',
-    component: Gato
-  },
-  {
-    name: 'Jogo da Velha',
-    path: '/jogo-da-velha',
-    component: Velha
   }
 ]
 
