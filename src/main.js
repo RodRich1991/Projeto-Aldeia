@@ -11,6 +11,7 @@ import JogosForm from './pages/games/Form'
 import Jogos from './pages/games/Jogos'
 import Gato from './pages/games/gato/Gato'
 import Velha from './pages/games/jogo-da-velha/Velha'
+import NewGenero from './pages/genero/Form'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -27,9 +28,14 @@ const routes = [
     component: Login
   },
   {
-    name: 'cadastr-usuario',
+    name: 'cadastro-usuario',
     path: '/cadastro-usuario',
     component: NewUser
+  },
+  {
+    name: 'cadastro-genero',
+    path: '/genero/novo',
+    component: NewGenero
   },
   {
     name: 'jogo-form',
