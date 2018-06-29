@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS tb_jogo (
   id INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(50) NOT NULL,
   id_genero INT,
-  votos INT UNSIGNED NOT NULL DEFAULT = 0,
+  votos INT UNSIGNED NOT NULL DEFAULT 0,
+  descricao text NOT NULL,
   FOREIGN KEY (id_genero) REFERENCES tb_genero (id),
   PRIMARY KEY (id)
 );
