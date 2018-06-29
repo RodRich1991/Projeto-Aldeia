@@ -1,6 +1,6 @@
 <template>
   <div>
-    <iframe :src="link" width="800" height="600"></iframe>
+    <iframe :src="link" width="1366" height="768"></iframe>
   </div>
 </template>
 
@@ -9,8 +9,12 @@ export default {
   name: 'Jogar',
   data: function () {
     return {
-      link: 'https://www.w3.org/Style/Examples/011/firstcss.en.html'
+      link: ''
     }
+  },
+  created () {
+    // console.warn(this.$route)
+    this.link = this.$route.params.url
   }
 }
 </script>
