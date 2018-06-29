@@ -29,21 +29,13 @@ export default {
   },
   created () {
     this.carregarPagina()
-    // this.setIframe('<p>hello</p>')
   },
   methods: {
-    // setIframe (html) {
-    //   document.getElementById('iframe').src = 'data:text/html;charset=utf-8,' + escape(html)
-    // },
     carregarPagina () {
       const proxy = new Proxy('jogo')
       const response = proxy.findAll()
       response.then(retorno => { this.jogos = retorno.data })
     }
-    // getPicName (jogo) {
-    //   // return "../assets/img/"+jogo.replace(" ","-")+".jpg"
-    //   return '../assets/img/alien.jpg'
-    // }
   }
 }
 </script>

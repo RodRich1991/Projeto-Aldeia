@@ -13,7 +13,6 @@ export default {
     }
   },
   created () {
-    // console.warn(this.$route)
     this.link = this.$route.params.url
   }
 }
