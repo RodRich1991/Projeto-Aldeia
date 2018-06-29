@@ -1,21 +1,41 @@
 <template>
-  <div class="d-block navbar navbar-light navbar-expand-md navigation-clean-button" style="background-color:rgb(254,78,78);">
-      <div class="container"><router-link to="/"><span class="navbar-brand" style="font-size:32px;">Projeto Aldeia</span></router-link><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse" id="navcol-1">
-              <ul class="nav navbar-nav mr-auto" style="margin:1px;height:67px;width:474px;">
-                  <router-link :to="{name: 'jogos'}"><li class="nav-item" role="presentation"><a class="nav-link active" href="#" style="font-size:24px;color:rgb(0,0,0);">Jogos</a></li></router-link>
-                  <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="font-size:24px;color:rgb(0,0,0);">Favoritos</a></li>
-                  <li v-if="logado" class="nav-item" role="presentation"><router-link :to="{ name: 'jogo-form'}" class="nav-link" style="font-size:24px;color:rgb(0,0,0);">Cadastrar Jogo</router-link></li>
-              </ul>
-              <form class="form-inline" method="post" style="margin:0px;padding:0px;">
-                  <h2 class="sr-only">Login Form</h2>
-                  <div class="illustration"></div>
-                  <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
-                  <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-                  <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div><a href="#" class="forgot" style="color:rgb(0,0,0);">Recuperar Senha</a>
-                  <router-link to="/cadastro-usuario"><span class="forgot" style="color:rgb(0,0,0);">Cadastrar</span></router-link>
-              </form>
-          </div>
+  <div class="d-block navbar navbar-light navbar-expand-md navigation-clean-button pt-0 pb-0" style="background: linear-gradient(to right, rgba(135,199,255,1) 0%, rgba(200,227,250,1) 35%, rgba(214,237,255,1) 65%, rgba(224,241,255,1) 85%, rgba(224,241,255,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87c7ff', endColorstr='#e0f1ff', GradientType=1 );">
+      <div class="d-flex align-items-center justify-content-between pl-3 pr-3">
+        <router-link to="/">
+          <span class="btn btn-outline-info p-0 pl-2 pr-2 mt-2 mb-2 mr-4 ml-0" style="font-size: 1.7rem;">
+            Aldeia
+          </span>
+        </router-link>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1">
+          <span class="sr-only">
+            Toggle navigation
+          </span>
+          <span class="navbar-toggler-icon" />
+        </button>
+        <div class="collapse navbar-collapse w-100" id="navcol-1">
+            <ul class="nav navbar-nav mr-auto w-100 d-flex align-items-center">
+              <li class="nav-item" role="presentation">
+                <router-link class="nav-link text-info" :style="`${$route.path === '/jogos' ? 'font-weight: bold;' : ''} font-size: 1.2rem;`" :to="{name: 'jogos'}">
+                  Jogos
+                </router-link>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link text-info" style="font-size: 1.2rem;" href="#">
+                  Favoritos
+                </a>
+              </li>
+              <li v-if="logado" class="nav-item" role="presentation">
+                <router-link :to="{ name: 'jogo-form'}" :style="`${$route.path === '/jogos/novo' ? 'font-weight: bold;' : ''} font-size: 1.2rem;`" class="nav-link text-info">
+                  Cadastrar Jogo
+                </router-link>
+              </li>
+            </ul>
+            <div class="d-none d-lg-flex">
+              <input class="form-control mr-2 bg-light" style="height: 2.5rem; font-size: 0.8rem; width: auto;" type="email" name="email" placeholder="E-mail">
+              <input class="form-control mr-2 bg-light" style="height: 2.5rem; font-size: 0.8rem; width: auto;" type="password" name="password" placeholder="Senha">
+              <button class="btn btn-outline-info pl-3 pr-3" style="height: 2.5rem; font-size: 0.8rem;" type="submit">Entrar</button>
+            </div>
+        </div>
       </div>
   </div>
 </template>
