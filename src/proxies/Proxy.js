@@ -23,6 +23,14 @@ export default class BaseProxy {
     })
   }
 
+  findUser (usuario) {
+    return new Promise((resolve, reject) => {
+      axios.get(`${this.endpoint}/${usuario}`, this.headers)
+        .then((response) => resolve(response.data))
+        .catch((erro) => reject(erro.data) || reject(erro))
+    })
+  }
+
   create (item) {
     return new Promise((resolve, reject) => {
       axios.post(`${this.endpoint}`, item, this.headers)

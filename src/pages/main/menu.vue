@@ -24,16 +24,26 @@
                   Favoritos
                 </a>
               </li>
-              <li v-if="logado" class="nav-item" role="presentation">
+              <li v-if="logado && usuario.grupo === 99" class="nav-item" role="presentation">
                 <router-link :to="{ name: 'jogo-form'}" :style="`${$route.path === '/jogos/novo' ? 'font-weight: bold;' : ''} font-size: 1.2rem;`" class="nav-link text-info">
                   Cadastrar Jogo
                 </router-link>
               </li>
+              <li v-if="logado && usuario.grupo === 99" class="nav-item" role="presentation">
+                <router-link :to="{ name: 'cadastro-genero'}" :style="`${$route.path === '/genero/novo' ? 'font-weight: bold;' : ''} font-size: 1.2rem;`" class="nav-link text-info">
+                  Cadastrar Genero
+                </router-link>
+              </li>
             </ul>
-            <div class="d-none d-lg-flex">
-              <input class="form-control mr-2 bg-light" style="height: 2.5rem; font-size: 0.8rem; width: auto;" type="email" name="email" placeholder="E-mail">
-              <input class="form-control mr-2 bg-light" style="height: 2.5rem; font-size: 0.8rem; width: auto;" type="password" name="password" placeholder="Senha">
-              <button class="btn btn-outline-info pl-3 pr-3" style="height: 2.5rem; font-size: 0.8rem;" type="submit">Entrar</button>
+            <div v-if="logado && usuario.id" class="row">
+              <span>Bem vindo {{ usuario.nome }}</span>
+              <a href="#" @click="usuario = null; logado = false"><span>Sair</span></a>
+            </div>
+            <div v-else class="d-none d-lg-flex">
+              <input v-model="txtUsuario" class="form-control mr-2 bg-light" style="height: 2.5rem; font-size: 0.8rem; width: auto;" type="text" name="usuario" placeholder="Usuario">
+              <input v-model="txtSenha" class="form-control mr-2 bg-light" style="height: 2.5rem; font-size: 0.8rem; width: auto;" type="password" name="password" placeholder="Senha">
+              <button class="btn btn-outline-info pl-3 pr-3" style="height: 2.5rem; font-size: 0.8rem;" @click="logar()">Entrar</button>
+              <router-link :to="{ name: 'cadastro-usuario' }"><button class="btn btn-outline-info pl-3 pr-3 ml-1" style="height: 2.5rem; font-size: 0.8rem;">Cadastre-se</button></router-link>
             </div>
         </div>
       </div>
@@ -41,11 +51,32 @@
 </template>
 
 <script>
+import Proxy from '@/proxies/Proxy'
+
 export default {
   name: 'Menu',
   data () {
     return {
-      logado: 1
+      logado: false,
+      txtUsuario: '',
+      txtSenha: '',
+      usuario: null
+    }
+  },
+  created () {
+    this.carregarPagina()
+  },
+  methods: {
+    carregarPagina () {
+      console.warn(this.usuario)
+    },
+    logar () {
+      const proxy = new Proxy('usuario')
+      const response = proxy.findUser(this.txtUsuario)
+      response.then(retorno => { this.usuario = retorno.data[0] })
+      if (this.usuario.usuario === this.txtUsuario && this.usuario.senha === this.txtSenha) {
+        this.logado = true
+      }
     }
   }
 }

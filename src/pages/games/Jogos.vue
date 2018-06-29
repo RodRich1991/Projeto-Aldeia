@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <iframe id="iframe" class="w-100" height="700"/>
+    <!-- <iframe id="iframe" class="w-100" height="700"/> -->
   </div>
 </template>
 <script>

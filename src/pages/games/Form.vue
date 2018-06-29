@@ -29,12 +29,15 @@
         <input type="file" class="custom-file-input bg-light" id="customFile">
       </div>
       <div class="form-group">
+        <label for="disabledTextInput">Digite o caminho do jogo</label>
+        <input v-model="jogo.pathUrl" type="text" id="URL" class="form-control bg-light" placeholder="">
+      </div>
+      <div class="form-group">
         <label for="disablesDesc">Descrição</label>
         <textarea rows="3" v-model="jogo.descricao" id="disablesDesc" class="form-control bg-light"></textarea>
       </div>
       <div @click.prevent="cadastrar" class="btn btn-info p-2 pl-3 pr-3">Cadastrar</div>
     </fieldset>
-    <iframe src="http://localhost/jogo-da-velha/" class="w-100" height="700"/>
   </form>
 </template>
 
@@ -50,7 +53,8 @@ export default {
       jogo: {
         nome: '',
         idGenero: 0,
-        descricao: ''
+        descricao: '',
+        pathUrl: ''
       },
       sucesso: false,
       falha: false

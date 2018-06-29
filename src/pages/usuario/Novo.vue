@@ -1,19 +1,29 @@
 <template>
   <div>
+    <div v-if="sucesso" class="m-4 text-center alert alert-success" role="alert">
+      {{ msg }}
+      <button type="button" class="close" aria-label="Close">
+        <span @click.prevent="resetAlert">&times;</span>
+      </button>
+    </div>
+    <div v-if="falha" class="m-4 text-center alert alert-danger" role="alert">
+      {{ msg }}
+      <button type="button" class="close" aria-label="Close">
+        <span @click.prevent="resetAlert">&times;</span>
+      </button>
+    </div>
     <div class="register-photo">
       <div class="clearfix"></div>
       <div class="clearfix"></div>
       <div class="form-container">
         <form class="col-6">
           <h2 class="text-center"><strong>Criar uma conta</strong></h2>
-          <div class="form-group"><input v-model="usuario.nome" class="form-control" type="text" name="Nome" placeholder="nome"></div>
-          <div class="form-group"><input v-model="usuario.senha" class="form-control" type="password" name="senha" placeholder="Password" autocomplete="off" inputmode="numeric"></div>
-          <div class="form-group"><input v-model="usuario.reSenha" class="form-control" type="password" name="confirmar senha" placeholder="Password (repeat)"></div><input v-model="usuario.email" class="form-control visible" type="email" name="E-mail" value="E-mail" placeholder="Email">
-          <div class="form-group">
-              <div class="form-check"><label class="form-check-label"><input class="form-check-input" type="checkbox">I agree to the license terms.</label></div>
-          </div>
-          <div class="form-group"><button class="btn btn-primary btn-block" type="submit" @click="cadastro" style="padding:7px;margin:28px;height:40px;">Sign Up</button></div>
-          <a href="#" class="already">You already have an account? Login here.</a>
+          <div class="form-group"><input v-model="usuario.nome" class="form-control" type="text" name="Nome" placeholder="Nome"></div>
+          <div class="form-group"><input v-model="usuario.usuario" class="form-control" type="text" name="Usuario" placeholder="Usuario"></div>
+          <div class="form-group"><input v-model="usuario.senha" class="form-control" type="password" name="senha" placeholder="Senha" autocomplete="off" inputmode="numeric"></div>
+          <div class="form-group"><input v-model="reSenha" class="form-control" type="password" name="confirmar senha" placeholder="Repetir a Senha"></div>
+          <input v-model="usuario.email" class="form-control visible" type="email" name="E-mail" value="E-mail" placeholder="Email">
+          <div class="form-group"><button class="btn btn-primary col-4" type="submit" @click.prevent="cadastro" style="padding:7px;margin:28px;height:40px; ">Cadastrar</button></div>
         </form>
       </div>
     </div>
@@ -30,21 +40,41 @@ export default {
     return {
       usuario: {
         nome: '',
+        usuario: '',
         senha: '',
-        reSenha: '',
         email: ''
-      }
+      },
+      reSenha: '',
+      sucesso: false,
+      falha: false
     }
   },
   methods: {
     cadastro () {
-      if (this.usuario.senha !== this.usuario.reSenha) {
-        console.warn('senhas nao concidem!')
+      if (this.usuario.senha !== this.reSenha) {
+        this.msg = 'As senhas nao concidem!'
+        this.falha = true
       } else {
         const proxy = new Proxy('usuario')
-        const response = proxy.create(this.usuario, ...this.usuario.reSenha)
-        response.then(retorno => console.warn(retorno))
+        console.warn(this.usuario)
+        const response = proxy.create(this.usuario)
+        response.then(retorno => {
+          if (retorno.data) {
+            this.msg = 'Usuario cadastrado com sucesso!'
+            this.sucesso = true
+          } else {
+            this.msg = 'Falha ao cadastrar usuario!'
+            this.falha = true
+          }
+        }).catch((e) => {
+          this.msg = e
+          this.falha = true
+        })
       }
+    },
+    resetAlert () {
+      this.sucesso = false
+      this.falha = false
     }
   }
 }
